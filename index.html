@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPF Forskningsguide | Hitta rätt stöd</title>
+    <style>
+        /* --- CSS STYLING --- */
+        :root {
+            --cpf-blue: #005eb8; /* Region Stockholm Blue */
+            --cpf-dark: #004485;
+            --light-bg: #f5f7fa;
+            --text-color: #333;
+            --border-color: #ddd;
+            --highlight-bg: #e8f4fd;
+            --accent-color: #e3000f; /* Slight accent */
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--cpf-blue);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+            font-size: 1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .privacy-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+
+        /* Content Area */
+        .content {
+            padding: 30px;
+        }
+
+        .step {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: var(--cpf-blue);
+            margin-top: 0;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            background-color: #fff;
+        }
+
+        select:focus {
+            border-color: var(--cpf-blue);
+            outline: none;
+        }
+
+        /* Radio Cards */
+        .radio-group {
+            display: grid;
+            gap: 12px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: flex-start;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .radio-option:hover {
+            background-color: #f8f9fa;
+            border-color: #bbb;
+        }
+
+        .radio-option.selected {
+            background-color: var(--highlight-bg);
+            border-color: var(--cpf-blue);
+            box-shadow: 0 0 0 1px var(--cpf-blue);
+        }
+
+        .radio-option input {
+            margin-right: 15px;
+            margin-top: 4px;
+            transform: scale(1.3);
+        }
+
+        .radio-content strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 1rem;
+        }
+
+        .radio-content span {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Guidance Boxes (Result Cards) */
+        .guidance-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-left: 5px solid var(--cpf-blue);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: none; /* Hidden by default */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .guidance-card.visible {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .guidance-card h3 {
+            margin-top: 0;
+            color: var(--cpf-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon { font-size: 1.5rem; }
+
+        .guidance-card a {
+            color: var(--cpf-blue);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .guidance-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Special Coordinator Card */
+        .coordinator-card {
+            background-color: #fff8e1; /* Light yellow/gold */
+            border-left-color: #fbc02d;
+        }
+        
+        .coord-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            display: block;
+            margin: 10px 0;
+        }
+
+        /* Navigation */
+        .actions {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 6px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary {
+            background-color: #e9ecef;
+            color: #495057;
+        }
+
+        .btn-primary {
+            background-color: var(--cpf-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--cpf-dark);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Reset Button */
+        .reset-link {
+            text-align: center;
+            margin-top: 20px;
+            display: block;
+            color: #888;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>CPF Forskningsguide</h1>
+        <p>Ett självhjälpsverktyg för dig som forskar inom psykiatrin i Stockholm.</p>
+        <span class="privacy-badge">🔒 Anonymt - Inga uppgifter sparas</span>
+    </header>
+
+    <div class="content">
+        
+        <!-- STEP 1: Identification (Klinik) -->
+        <div id="step1" class="step active">
+            <h2>Var arbetar du?</h2>
+            <p>För att kunna hänvisa dig till rätt lokalt stöd behöver vi veta vilken klinik du tillhör.</p>
+            
+            <div class="form-group">
+                <label for="clinic">Välj din klinik:</label>
+                <select id="clinic">
+                    <option value="">-- Välj klinik i listan --</option>
+                    <option value="BCS">Beroendecentrum Stockholm (BCS)</option>
+                    <option value="BUP">Barn- och ungdomspsykiatri (BUP)</option>
+                    <option value="NSP">Norra Stockholms psykiatri (NSP)</option>
+                    <option value="PNV">Psykiatri Nordväst (PNV)</option>
+                    <option value="PSV">Psykiatri Sydväst (PSV)</option>
+                    <option value="PSS">Psykiatri Södra Stockholm (PSS)</option>
+                    <option value="SCA">Stockholms centrum för ätstörningar (SCÄ)</option>
+                    <option value="Annat">Annat / Vet ej</option>
+                </select>
+            </div>
+
+            <div class="actions" style="justify-content: flex-end;">
+                <button class="btn btn-primary" onclick="goToStep(2)">Nästa</button>
+            </div>
+        </div>
+
+        <!-- STEP 2: Context (Huvudman) -->
+        <div id="step2" class="step">
+            <h2>Vem är huvudman?</h2>
+            <p>Vem har det juridiska ansvaret för forskningsdata i ditt projekt?</p>
+            
+            <div class="radio-group">
+                <label class="radio-option">
+                    <input type="radio" name="huvudman" value="SLSO">
+                    <div class="radio-content">
+                        <strong>Region Stockholm (SLSO)</strong>
+                        <span>Vanligt vid kliniska studier på patienter/journaldata.</span>
+                    </div>
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="huvudman" value="KI">
+                    <div class="radio-content">
+                        <strong>Karolinska Institutet (KI)</strong>
+                        <span>Vanligt vid grundforskning eller registerstudier utanför vården.</span>
+                    </div>
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="huvudman" value="Bada">
+                    <div class="radio-content">
+                        <strong>Båda / Samverkan</strong>
+                        <span>När båda organisationerna är aktivt delaktiga.</span>
+                    </div>
+                </label>
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-secondary" onclick="goToStep(1)">Tillbaka</button>
+                <button class="btn btn-primary" onclick="goToStep(3)">Nästa</button>
+            </div>
+        </div>
+
+        <!-- STEP 3: Needs (Kategori) -->
+        <div id="step3" class="step">
+            <h2>Vad behöver du hjälp med?</h2>
+            
+            <div class="radio-group">
+                <label class="radio-option">
+                    <input type="radio" name="category" value="Starta" onchange="showResult()">
+                    <div class="radio-content">
+                        <strong>Starta studie / Lokala tillstånd</strong>
+                        <span>Förankring, lokala avtal, etikansökan, registrering.</span>
+                    </div>
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="category" value="Data" onchange="showResult()">
+                    <div class="radio-content">
+                        <strong>Datahantering & Lagring</strong>
+                        <span>DMP, REDCap, ELN, servrar, transkribering.</span>
+                    </div>
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="category" value="Statistik" onchange="showResult()">
+                    <div class="radio-content">
+                        <strong>Metod & Statistik</strong>
+                        <span>Studiedesign, powerberäkning, statistikval.</span>
+                    </div>
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="category" value="Juridik" onchange="showResult()">
+                    <div class="radio-content">
+                        <strong>Juridik, Avtal & Registeruttag</strong>
+                        <span>PuB-avtal, DTA, Menprövning, uttag från TakeCare.</span>
+                    </div>
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="category" value="Etik" onchange="showResult()">
+                    <div class="radio-content">
+                        <strong>Etikprövning</strong>
+                        <span>Förhandsgranskning av ansökan.</span>
+                    </div>
+                </label>
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-secondary" onclick="goToStep(2)">Tillbaka</button>
+                <!-- No Next button here, result shows automatically below -->
+            </div>
+
+            <!-- DYNAMIC RESULTS AREA -->
+            <div id="results-area" style="margin-top: 40px; border-top: 2px dashed #ddd; padding-top: 30px; display: none;">
+                <h2 style="border:none; color: #333;">Rekommenderad väg framåt:</h2>
+                
+                <!-- 1. COORDINATOR CARD (Dynamic Name) -->
+                <div id="card-coordinator" class="guidance-card coordinator-card">
+                    <h3><span class="icon">📍</span> Kontakta din FoU-koordinator</h3>
+                    <p>För förankring, lokala mallar och godkännande av verksamhetschef är detta din första kontakt:</p>
+                    <span id="coord-display-name" class="coord-name">Namn Namnsson</span>
+                    <p><em>FoU-koordinator vid <span id="coord-display-clinic">Din Klinik</span></em></p>
+                </div>
+
+                <!-- NEW: REGION STOCKHOLM DATABASE -->
+                <div id="card-database-slso" class="guidance-card alert-stop">
+                    <h3><span class="icon">📝</span> Obligatorisk Registrering (SLSO)</h3>
+                    <p>Alla studier där Region Stockholm (SLSO) är huvudman måste registreras i <strong>Region Stockholms databas för kliniska studier</strong>.</p>
+                    <p>Detta ersätter den gamla SLSO-databasen. Registreringen ökar transparensen och är ett krav.</p>
+                    <a href="https://sllse.sharepoint.com/sites/KTeamsKarolinskasDatabasForKliniskaStudier/Lists/Registrerade%20Forskningsstudier%20Karolinska%20Universi/Standardvy%20Databas.aspx?viewid=7107bce2%2D9fa8%2D4a83%2Dae23%2D322fba1247f9" target="_blank">Gå till databasen (kräver inlogg) &rarr;</a>
+                </div>
+
+                <!-- NEW: DIARIEFÖRING -->
+                <div id="card-diary-slso" class="guidance-card">
+                    <h3><span class="icon">🗂️</span> Diarieföring & Arkivering (SLSO)</h3>
+                    <p>Alla studier ska ha ett diarienummer. Detta kan ofta skapas via Regionens databas (se ovan).</p>
+                    <ul>
+                        <li><strong>Diarieföring:</strong> registrator.slso@regionstockholm.se</li>
+                        <li><strong>Arkivering/Gallring:</strong> arkivarie.slso@regionstockholm.se</li>
+                    </ul>
+                    <p><em>Kontakta alltid registrator när studien startar för att få ett ärendenummer.</em></p>
+                </div>
+
+                <!-- 2. CLINICUM CARD -->
+                <div id="card-clinicum" class="guidance-card">
+                    <h3><span class="icon">🔍</span> Vetenskapligt metodstöd</h3>
+                    <p>CPF tillhandahåller inte statistiskt stöd. Vänd dig till <strong>Clinicum</strong> för kostnadsfri rådgivning.</p>
+                    <a href="https://medarbetare.ki.se/forskarstod/klinisk-forskning/clinicum" target="_blank">Boka tid hos Clinicum &rarr;</a>
+                </div>
+
+                <!-- 3. DATA STORAGE CARDS -->
+                <div id="card-storage-slso" class="guidance-card">
+                    <h3><span class="icon">🔒</span> Beställning av N-yta (SLSO)</h3>
+                    <p>För säker lagring där Region Stockholm är huvudman. Kräver e-tjänstekort.</p>
+                    <a href="https://tellus.regionstockholm.se/sp?id=sc_cat_item&sys_id=3ca8372e344f9b40fe7d41a570f170a0" target="_blank">Gå till Tellus beställning &rarr;</a>
+                </div>
+
+                <div id="card-storage-ki" class="guidance-card">
+                    <h3><span class="icon">📁</span> Projektmapp på KI</h3>
+                    <p>För lagring på KI:s servrar. Beställs centralt via IT.</p>
+                    <a href="https://medarbetare.ki.se/stod-och-verktyg/it-och-telefoni/lagra-och-dela-filer" target="_blank">Beställ via Medarbetarportalen &rarr;</a>
+                </div>
+
+                <!-- 4. DATA SYSTEMS -->
+                <div id="card-systems" class="guidance-card">
+                    <h3><span class="icon">💻</span> System & Verktyg</h3>
+                    <ul>
+                        <li><strong>ELN (Loggbok):</strong> <a href="https://www.psykiatriforskning.se/forskning/for-dig-som-forskar/dokumentation-eln/" target="_blank">Läs manualen här</a></li>
+                        <li><strong>REDCap (KI):</strong> <a href="https://medarbetare.ki.se/forskarstod/hantera-forskningsdata/skapa-samla-in-och-lagra-forskningsdata/redcap/tillgang-till-redcap" target="_blank">Ansök om tillgång (KI)</a></li>
+                        <li><strong>REDCap (Regionen):</strong> <a href="https://www.karolinska.se/forskning-och-utbildning/forskning/stodenheter-for-klinisk-forskning/redcap---datainsamling-i-kliniska-studier/" target="_blank">Stöd för kliniska studier</a></li>
+                        <li><strong>Transkribering:</strong> Använd verktyget <em>Whisper</em> (lokal installation).</li>
+                    </ul>
+                </div>
+
+                <!-- 5. JURIDIK / REGISTRY -->
+                <div id="card-legal-slso" class="guidance-card">
+                    <h3><span class="icon">🏥</span> Juridik & Uttag (SLSO)</h3>
+                    <ul>
+                        <li><strong>Menprövning/Uttag:</strong> fouu.slso@regionstockholm.se</li>
+                        <li><strong>GDPR/Avtal:</strong> gdpr.slso@regionstockholm.se</li>
+                        <li><strong>Mallar:</strong> Finns hos din FoU-koordinator (se ovan).</li>
+                    </ul>
+                </div>
+
+                <div id="card-legal-ki" class="guidance-card">
+                    <h3><span class="icon">🎓</span> Juridik & Avtal (KI)</h3>
+                    <p>Kontakta juristerna på avtalsenheten.</p>
+                    <a href="mailto:avtal@ki.se">avtal@ki.se</a>
+                </div>
+
+                <!-- 6. ETIK -->
+                <div id="card-etik" class="guidance-card">
+                    <h3><span class="icon">⚖️</span> Etikprövning</h3>
+                    <p>Alla kliniska studier måste ha godkännande från Etikprövningsmyndigheten (EPM). Information om hur ansökan går till hittar du hos EPM.</p>
+                    <p><a href="https://etikprovningsmyndigheten.se/for-forskare/sa-gar-det-till/" target="_blank">Etikprövning – så går det till &rarr;</a></p>
+                    <hr style="border: 0; border-top: 1px solid #eee; margin: 10px 0;">
+                    <p><strong>Behöver du hjälp med förhandsgranskning?</strong><br>
+                    Vi på CPF Support hjälper dig gärna att granska din ansökan innan du skickar den till EPM.</p>
+                    <p>1. Skriv ut ansökan som PDF från Ethix.<br>
+                       2. Mejla den till oss.</p>
+                    <a href="mailto:cpfsupport@cns.ki.se">cpfsupport@cns.ki.se</a>
+                </div>
+                
+                 <!-- 7. RDO -->
+                <div id="card-rdo" class="guidance-card">
+                    <h3><span class="icon">💾</span> RDO (Data Office)</h3>
+                    <p>För granskning av Datahanteringsplan (DMP) och generella datafrågor.</p>
+                    <a href="mailto:rdo@ki.se">rdo@ki.se</a>
+                </div>
+
+                <span class="reset-link" onclick="location.reload()">Börja om</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    /* --- DATA & LOGIC --- */
+
+    // Databas över koordinatorer (Uppdaterad från bild)
+    const coordinators = {
+        "BCS": "Sara Wallhed Finn",
+        "BUP": "Ulf Jonsson",
+        "NSP": "Mikael Tiger",
+        "PNV": "Marc Guitart-Masip",
+        "PSV": "Max Sannemalm",
+        "PSS": "Anna Björdhal",
+        "SCA": "Anne-Charlotte Wiberg",
+        "Ratts": "Vänligen kontakta klinikledningen", // Fallback om ej i listan
+        "Annat": "din lokala klinikledning"
+    };
+    
+    // Kliniknamn för visning
+    const clinicNames = {
+        "BCS": "Beroendecentrum Stockholm",
+        "BUP": "Barn- och ungdomspsykiatri",
+        "NSP": "Norra Stockholms psykiatri",
+        "PNV": "Psykiatri Nordväst",
+        "PSV": "Psykiatri Sydväst",
+        "PSS": "Psykiatri Södra Stockholm",
+        "SCA": "Stockholms centrum för ätstörningar",
+        "Annat": "din klinik"
+    };
+
+    function goToStep(stepNumber) {
+        // Validation Step 1
+        if (stepNumber === 2) {
+            const clinic = document.getElementById("clinic").value;
+            if (!clinic) {
+                alert("Vänligen välj en klinik i listan.");
+                return;
+            }
+        }
+
+        // Switch visible step
+        document.querySelectorAll(".step").forEach(el => el.classList.remove("active"));
+        document.getElementById("step" + stepNumber).classList.add("active");
+
+        // Styling for radio options (selection highlight)
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.parentElement.parentElement.classList.remove('selected');
+            if(radio.checked) {
+                radio.parentElement.parentElement.classList.add('selected');
+            }
+        });
+    }
+
+    // Add click listeners to radios for styling
+    document.querySelectorAll('.radio-option').forEach(option => {
+        option.addEventListener('click', function() {
+            // Find the radio inside and check it
+            const radio = this.querySelector('input[type="radio"]');
+            radio.checked = true;
+            
+            // Update visual state
+            document.querySelectorAll('.radio-option').forEach(el => el.classList.remove('selected'));
+            this.classList.add('selected');
+            
+            // If in Step 3, trigger result immediately
+            if(radio.name === "category") {
+                showResult();
+            }
+        });
+    });
+
+
+    function showResult() {
+        // 1. Get User Inputs
+        const clinicCode = document.getElementById("clinic").value;
+        const huvudman = document.querySelector('input[name="huvudman"]:checked')?.value;
+        const category = document.querySelector('input[name="category"]:checked')?.value;
+
+        if (!clinicCode || !huvudman || !category) return; // Wait until all chosen
+
+        // 2. Prepare Display Area
+        const resultsArea = document.getElementById("results-area");
+        resultsArea.style.display = "block";
+        resultsArea.scrollIntoView({ behavior: 'smooth' });
+
+        // Hide all cards first
+        document.querySelectorAll(".guidance-card").forEach(el => el.classList.remove("visible"));
+
+        // 3. LOGIC ENGINE
+
+        // --- Coordinator Logic (Always relevant for local anchoring) ---
+        // If category is Starta, Juridik, or generally needing local help
+        if (category === "Starta" || category === "Juridik" || category === "Etik") {
+            const coordName = coordinators[clinicCode] || "din lokala samordnare";
+            const clinicName = clinicNames[clinicCode] || "din klinik";
+            
+            document.getElementById("coord-display-name").innerText = coordName;
+            document.getElementById("coord-display-clinic").innerText = clinicName;
+            
+            document.getElementById("card-coordinator").classList.add("visible");
+        }
+
+        // --- SPECIAL: Region Stockholm Database & Diary ---
+        // Shows if SLSO is involved AND user is starting/legal
+        if ((category === "Starta" || category === "Juridik") && (huvudman === "SLSO" || huvudman === "Bada")) {
+            document.getElementById("card-database-slso").classList.add("visible");
+            document.getElementById("card-diary-slso").classList.add("visible");
+        }
+
+        // --- Category Specifics ---
+
+        if (category === "Statistik") {
+            document.getElementById("card-clinicum").classList.add("visible");
+        }
+
+        if (category === "Data") {
+            // Show Storage based on Huvudman
+            if (huvudman === "SLSO" || huvudman === "Bada") {
+                document.getElementById("card-storage-slso").classList.add("visible");
+            }
+            if (huvudman === "KI" || huvudman === "Bada") {
+                document.getElementById("card-storage-ki").classList.add("visible");
+            }
+            // Show Systems & RDO
+            document.getElementById("card-systems").classList.add("visible");
+            document.getElementById("card-rdo").classList.add("visible");
+        }
+
+        if (category === "Juridik") {
+            // Show Legal based on Huvudman
+            if (huvudman === "SLSO" || huvudman === "Bada") {
+                document.getElementById("card-legal-slso").classList.add("visible");
+            }
+            if (huvudman === "KI" || huvudman === "Bada") {
+                document.getElementById("card-legal-ki").classList.add("visible");
+            }
+        }
+
+        if (category === "Etik") {
+            document.getElementById("card-etik").classList.add("visible");
+        }
+    }
+
+</script>
+
+</body>
+</html>
