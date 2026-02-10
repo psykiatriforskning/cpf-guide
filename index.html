@@ -3,77 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CPF Forskningsguide | Hitta rätt stöd</title>
+    <title>Forskningsguide | Hitta rätt stöd</title>
     <style>
         /* --- CSS STYLING --- */
         :root {
-            --cpf-blue: #005eb8; /* Region Stockholm Blue */
-            --cpf-dark: #004485;
-            --light-bg: #f5f7fa;
-            --text-color: #333;
-            --border-color: #ddd;
-            --highlight-bg: #e8f4fd;
-            --accent-color: #e3000f; /* Slight accent */
+            /* FÄRGER FRÅN BILDANALYS */
+            --rs-dark-blue: #00315c; /* Mörk marinblå (Knappar i header) */
+            --rs-medium-blue: #005eb8; /* Klarare blå (Informationsrutor) */
+            --rs-bg-gray: #f3f3f3; /* Ljusgrå bakgrund */
+            
+            --text-color: #1a1a1a; /* Nästan svart för text */
+            --border-color: #dcdcdc;
+            --highlight-bg: #eef6fc;
         }
 
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--light-bg);
+            background-color: var(--rs-bg-gray);
             color: var(--text-color);
             margin: 0;
-            padding: 20px;
+            padding: 0; /* Fullbredd */
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            flex-direction: column;
+            align-items: center;
             min-height: 100vh;
         }
 
-        .container {
-            background: white;
-            width: 100%;
-            max-width: 800px;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Header */
+        /* HEADER - UPPDATERAD TILL MÖRKBLÅ BAKGRUND */
         header {
-            background-color: var(--cpf-blue);
+            background-color: var(--rs-dark-blue);
             color: white;
-            padding: 30px;
+            width: 100%;
+            padding: 40px 0; /* Lite mer luft */
+            border-bottom: none;
             text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
 
         header h1 {
             margin: 0;
-            font-size: 1.8rem;
-            font-weight: 600;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: white;
         }
 
         header p {
-            margin: 10px 0 0;
+            margin: 15px 0 0;
             opacity: 0.9;
-            font-size: 1rem;
-            max-width: 600px;
+            font-size: 1.15rem;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.5;
+            color: white;
         }
 
-        .privacy-badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-top: 10px;
+        /* CONTAINER */
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin-top: -30px; /* Flyttar upp innehållet lite över headern för modern look */
+            margin-bottom: 50px;
+            background: transparent; 
+            padding: 0 20px; /* Marginaler på mobilen */
+            box-sizing: border-box;
         }
 
-        /* Content Area */
+        /* CONTENT CARDS */
         .content {
-            padding: 30px;
+            background: white;
+            padding: 40px;
+            border-radius: 8px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
 
         .step {
@@ -86,19 +87,24 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         h2 {
-            color: var(--cpf-blue);
+            color: var(--rs-dark-blue);
             margin-top: 0;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 15px;
+            font-size: 1.8rem;
+            font-weight: 700;
             margin-bottom: 25px;
         }
 
-        /* Form Elements */
+        p {
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        /* FORM ELEMENTS */
         .form-group {
             margin-bottom: 25px;
         }
@@ -107,168 +113,204 @@
             display: block;
             margin-bottom: 10px;
             font-weight: 600;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
         }
 
         select {
             width: 100%;
-            padding: 12px;
-            border: 2px solid var(--border-color);
-            border-radius: 6px;
+            padding: 15px;
+            border: 1px solid #8a8a8a; /* Tydligare kantlinje */
+            border-radius: 4px;
             font-size: 1rem;
             background-color: #fff;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300315c%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px top 50%;
+            background-size: 12px auto;
         }
 
         select:focus {
-            border-color: var(--cpf-blue);
-            outline: none;
+            border-color: var(--rs-dark-blue);
+            outline: 2px solid var(--rs-dark-blue);
         }
 
-        /* Radio Cards */
+        /* RADIO CARDS - Modernare look */
         .radio-group {
             display: grid;
-            gap: 12px;
+            gap: 15px;
         }
 
         .radio-option {
             display: flex;
             align-items: flex-start;
             border: 1px solid var(--border-color);
-            padding: 15px;
-            border-radius: 8px;
+            padding: 20px;
+            border-radius: 4px; /* Regionstyle: ofta lite skarpare */
             cursor: pointer;
             transition: all 0.2s;
             background: white;
+            position: relative;
         }
 
         .radio-option:hover {
-            background-color: #f8f9fa;
-            border-color: #bbb;
+            background-color: #f9f9f9;
+            border-color: var(--rs-dark-blue);
         }
 
         .radio-option.selected {
             background-color: var(--highlight-bg);
-            border-color: var(--cpf-blue);
-            box-shadow: 0 0 0 1px var(--cpf-blue);
+            border-color: var(--rs-dark-blue);
+            border-width: 2px;
+            padding: 19px; /* Compensate for border width */
         }
 
         .radio-option input {
             margin-right: 15px;
-            margin-top: 4px;
+            margin-top: 5px;
             transform: scale(1.3);
+            accent-color: var(--rs-dark-blue);
         }
 
         .radio-content strong {
             display: block;
-            margin-bottom: 4px;
-            font-size: 1rem;
+            margin-bottom: 6px;
+            font-size: 1.1rem;
+            color: var(--rs-dark-blue);
         }
 
         .radio-content span {
-            font-size: 0.9rem;
-            color: #666;
+            font-size: 0.95rem;
+            color: #555;
         }
 
-        /* Guidance Boxes (Result Cards) */
+        /* BUTTONS - PILLERFORMADE (Enligt bild) */
+        .actions {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #eee;
+            padding-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 32px;
+            border-radius: 50px; /* PILLERFORM */
+            border: none;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Primärknapp (Nästa) - Mörkblå som i headern på bilden */
+        .btn-primary {
+            background-color: var(--rs-dark-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #002240;
+            transform: translateY(-1px);
+        }
+
+        /* Sekundärknapp (Tillbaka) - Vit med mörkblå ram */
+        .btn-secondary {
+            background-color: white;
+            color: var(--rs-dark-blue);
+            border: 2px solid var(--rs-dark-blue);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f0f5fa;
+        }
+
+        /* RESULTATKORT - Designade som "I Fokus"-rutorna */
         .guidance-card {
             background: white;
-            border: 1px solid #ddd;
-            border-left: 5px solid var(--cpf-blue);
-            border-radius: 6px;
-            padding: 20px;
-            margin-bottom: 20px;
-            display: none; /* Hidden by default */
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: none;
+            border-left: none; /* Tog bort den gamla vänsterkanten */
+            border-radius: 0; /* Regionen kör ofta skarpa kanter på moduler */
+            padding: 0;
+            margin-bottom: 30px;
+            display: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
         }
 
         .guidance-card.visible {
-            display: block;
-            animation: slideIn 0.3s ease;
+            display: flex; /* Flex för att få färgblocket till vänster/höger */
+            flex-direction: column;
+            animation: slideIn 0.4s ease;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-10px); }
-            to { opacity: 1; transform: translateX(0); }
+        /* Blå header på korten för att efterlikna "I fokus"-rutorna */
+        .card-header {
+            background-color: var(--rs-medium-blue);
+            color: white;
+            padding: 20px 25px;
         }
 
-        .guidance-card h3 {
-            margin-top: 0;
-            color: var(--cpf-dark);
+        .card-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .icon { font-size: 1.5rem; }
+        .card-body {
+            padding: 25px;
+            background: white;
+        }
+
+        /* Special style for Coordinator (Gul/Guld variant eller mörkblå) */
+        .coordinator-card .card-header {
+            background-color: var(--rs-dark-blue);
+        }
+
+        /* Alert style for mandatory things */
+        .alert-stop .card-header {
+            background-color: #d60000; /* Varningsröd för stopp/krav */
+        }
 
         .guidance-card a {
-            color: var(--cpf-blue);
-            font-weight: 600;
+            color: var(--rs-dark-blue);
+            font-weight: 700;
             text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+            border-bottom: 2px solid var(--rs-dark-blue);
         }
         
         .guidance-card a:hover {
-            text-decoration: underline;
+            color: var(--rs-medium-blue);
+            border-color: var(--rs-medium-blue);
         }
 
-        /* Special Coordinator Card */
-        .coordinator-card {
-            background-color: #fff8e1; /* Light yellow/gold */
-            border-left-color: #fbc02d;
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
+
         .coord-name {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #333;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--rs-dark-blue);
             display: block;
             margin: 10px 0;
         }
 
-        /* Navigation */
-        .actions {
-            margin-top: 30px;
-            display: flex;
-            justify-content: space-between;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
-        }
-
-        .btn {
-            padding: 12px 28px;
-            border-radius: 6px;
-            border: none;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .btn-secondary {
-            background-color: #e9ecef;
-            color: #495057;
-        }
-
-        .btn-primary {
-            background-color: var(--cpf-blue);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--cpf-dark);
-        }
-
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* Reset Button */
+        /* Reset Link */
         .reset-link {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 40px;
             display: block;
-            color: #888;
+            color: #666;
             font-size: 0.9rem;
             cursor: pointer;
             text-decoration: underline;
@@ -278,13 +320,12 @@
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>CPF Forskningsguide</h1>
-        <p>Ett självhjälpsverktyg för dig som forskar inom psykiatrin i Stockholm.</p>
-        <span class="privacy-badge">🔒 Anonymt - Inga uppgifter sparas</span>
-    </header>
+<header>
+    <h1>Forskningsguide</h1>
+    <p>Ett självhjälpsverktyg för dig som forskar inom psykiatrin i Stockholm.</p>
+</header>
 
+<div class="container">
     <div class="content">
         
         <!-- STEP 1: Identification (Klinik) -->
@@ -308,7 +349,7 @@
             </div>
 
             <div class="actions" style="justify-content: flex-end;">
-                <button class="btn btn-primary" onclick="goToStep(2)">Nästa</button>
+                <button class="btn btn-primary" onclick="goToStep(2)">Nästa &rarr;</button>
             </div>
         </div>
 
@@ -343,7 +384,7 @@
 
             <div class="actions">
                 <button class="btn btn-secondary" onclick="goToStep(1)">Tillbaka</button>
-                <button class="btn btn-primary" onclick="goToStep(3)">Nästa</button>
+                <button class="btn btn-primary" onclick="goToStep(3)">Nästa &rarr;</button>
             </div>
         </div>
 
@@ -395,101 +436,147 @@
             </div>
 
             <!-- DYNAMIC RESULTS AREA -->
-            <div id="results-area" style="margin-top: 40px; border-top: 2px dashed #ddd; padding-top: 30px; display: none;">
-                <h2 style="border:none; color: #333;">Rekommenderad väg framåt:</h2>
+            <div id="results-area" style="margin-top: 50px; display: none;">
+                <h2 style="text-align: center; margin-bottom: 40px;">Rekommenderad väg framåt</h2>
                 
-                <!-- 1. COORDINATOR CARD (Dynamic Name) -->
+                <!-- 1. COORDINATOR CARD -->
                 <div id="card-coordinator" class="guidance-card coordinator-card">
-                    <h3><span class="icon">📍</span> Kontakta din FoU-koordinator</h3>
-                    <p>För förankring, lokala mallar och godkännande av verksamhetschef är detta din första kontakt:</p>
-                    <span id="coord-display-name" class="coord-name">Namn Namnsson</span>
-                    <p><em>FoU-koordinator vid <span id="coord-display-clinic">Din Klinik</span></em></p>
+                    <div class="card-header">
+                        <h3><span class="icon">📍</span> Kontakta din FoU-koordinator</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>För förankring, lokala mallar och godkännande av verksamhetschef är detta din första kontakt:</p>
+                        <span id="coord-display-name" class="coord-name">Namn Namnsson</span>
+                        <p><em>FoU-koordinator vid <span id="coord-display-clinic">Din Klinik</span></em></p>
+                    </div>
                 </div>
 
                 <!-- NEW: REGION STOCKHOLM DATABASE -->
                 <div id="card-database-slso" class="guidance-card alert-stop">
-                    <h3><span class="icon">📝</span> Obligatorisk Registrering (SLSO)</h3>
-                    <p>Alla studier där Region Stockholm (SLSO) är huvudman måste registreras i <strong>Region Stockholms databas för kliniska studier</strong>.</p>
-                    <p>Detta ersätter den gamla SLSO-databasen. Registreringen ökar transparensen och är ett krav.</p>
-                    <a href="https://sllse.sharepoint.com/sites/KTeamsKarolinskasDatabasForKliniskaStudier/Lists/Registrerade%20Forskningsstudier%20Karolinska%20Universi/Standardvy%20Databas.aspx?viewid=7107bce2%2D9fa8%2D4a83%2Dae23%2D322fba1247f9" target="_blank">Gå till databasen (kräver inlogg) &rarr;</a>
+                    <div class="card-header">
+                        <h3><span class="icon">📝</span> Obligatorisk Registrering (SLSO)</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Alla studier där Region Stockholm (SLSO) är huvudman måste registreras i <strong>Region Stockholms databas för kliniska studier</strong>.</p>
+                        <p>Detta ersätter den gamla SLSO-databasen. Registreringen ökar transparensen och är ett krav.</p>
+                        <a href="https://sllse.sharepoint.com/sites/KTeamsKarolinskasDatabasForKliniskaStudier/Lists/Registrerade%20Forskningsstudier%20Karolinska%20Universi/Standardvy%20Databas.aspx?viewid=7107bce2%2D9fa8%2D4a83%2Dae23%2D322fba1247f9" target="_blank">Gå till databasen (kräver inlogg) &rarr;</a>
+                    </div>
                 </div>
 
                 <!-- NEW: DIARIEFÖRING -->
                 <div id="card-diary-slso" class="guidance-card">
-                    <h3><span class="icon">🗂️</span> Diarieföring & Arkivering (SLSO)</h3>
-                    <p>Alla studier ska ha ett diarienummer. Detta kan ofta skapas via Regionens databas (se ovan).</p>
-                    <ul>
-                        <li><strong>Diarieföring:</strong> registrator.slso@regionstockholm.se</li>
-                        <li><strong>Arkivering/Gallring:</strong> arkivarie.slso@regionstockholm.se</li>
-                    </ul>
-                    <p><em>Kontakta alltid registrator när studien startar för att få ett ärendenummer.</em></p>
+                    <div class="card-header">
+                        <h3><span class="icon">🗂️</span> Diarieföring & Arkivering (SLSO)</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Alla studier ska ha ett diarienummer. Detta kan ofta skapas via Regionens databas (se ovan).</p>
+                        <ul>
+                            <li><strong>Diarieföring:</strong> registrator.slso@regionstockholm.se</li>
+                            <li><strong>Arkivering/Gallring:</strong> arkivarie.slso@regionstockholm.se</li>
+                        </ul>
+                        <p><em>Kontakta alltid registrator när studien startar för att få ett ärendenummer.</em></p>
+                    </div>
                 </div>
 
                 <!-- 2. CLINICUM CARD -->
                 <div id="card-clinicum" class="guidance-card">
-                    <h3><span class="icon">🔍</span> Vetenskapligt metodstöd</h3>
-                    <p>CPF tillhandahåller inte statistiskt stöd. Vänd dig till <strong>Clinicum</strong> för kostnadsfri rådgivning.</p>
-                    <a href="https://medarbetare.ki.se/forskarstod/klinisk-forskning/clinicum" target="_blank">Boka tid hos Clinicum &rarr;</a>
+                    <div class="card-header">
+                        <h3><span class="icon">🔍</span> Vetenskapligt metodstöd</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>CPF tillhandahåller inte statistiskt stöd. Vänd dig till <strong>Clinicum</strong> för kostnadsfri rådgivning.</p>
+                        <a href="https://medarbetare.ki.se/forskarstod/klinisk-forskning/clinicum" target="_blank">Boka tid hos Clinicum &rarr;</a>
+                    </div>
                 </div>
 
                 <!-- 3. DATA STORAGE CARDS -->
                 <div id="card-storage-slso" class="guidance-card">
-                    <h3><span class="icon">🔒</span> Beställning av N-yta (SLSO)</h3>
-                    <p>För säker lagring där Region Stockholm är huvudman. Kräver e-tjänstekort.</p>
-                    <a href="https://tellus.regionstockholm.se/sp?id=sc_cat_item&sys_id=3ca8372e344f9b40fe7d41a570f170a0" target="_blank">Gå till Tellus beställning &rarr;</a>
+                    <div class="card-header">
+                        <h3><span class="icon">🔒</span> Beställning av N-yta (SLSO)</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>För säker lagring där Region Stockholm är huvudman. Kräver e-tjänstekort.</p>
+                        <a href="https://tellus.regionstockholm.se/sp?id=sc_cat_item&sys_id=3ca8372e344f9b40fe7d41a570f170a0" target="_blank">Gå till Tellus beställning &rarr;</a>
+                    </div>
                 </div>
 
                 <div id="card-storage-ki" class="guidance-card">
-                    <h3><span class="icon">📁</span> Projektmapp på KI</h3>
-                    <p>För lagring på KI:s servrar. Beställs centralt via IT.</p>
-                    <a href="https://medarbetare.ki.se/stod-och-verktyg/it-och-telefoni/lagra-och-dela-filer" target="_blank">Beställ via Medarbetarportalen &rarr;</a>
+                    <div class="card-header">
+                        <h3><span class="icon">📁</span> Projektmapp på KI</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>För lagring på KI:s servrar. Beställs centralt via IT.</p>
+                        <a href="https://medarbetare.ki.se/stod-och-verktyg/it-och-telefoni/lagra-och-dela-filer" target="_blank">Beställ via Medarbetarportalen &rarr;</a>
+                    </div>
                 </div>
 
                 <!-- 4. DATA SYSTEMS -->
                 <div id="card-systems" class="guidance-card">
-                    <h3><span class="icon">💻</span> System & Verktyg</h3>
-                    <ul>
-                        <li><strong>ELN (Loggbok):</strong> <a href="https://www.psykiatriforskning.se/forskning/for-dig-som-forskar/dokumentation-eln/" target="_blank">Läs manualen här</a></li>
-                        <li><strong>REDCap (KI):</strong> <a href="https://medarbetare.ki.se/forskarstod/hantera-forskningsdata/skapa-samla-in-och-lagra-forskningsdata/redcap/tillgang-till-redcap" target="_blank">Ansök om tillgång (KI)</a></li>
-                        <li><strong>REDCap (Regionen):</strong> <a href="https://www.karolinska.se/forskning-och-utbildning/forskning/stodenheter-for-klinisk-forskning/redcap---datainsamling-i-kliniska-studier/" target="_blank">Stöd för kliniska studier</a></li>
-                        <li><strong>Transkribering:</strong> Använd verktyget <em>Whisper</em> (lokal installation).</li>
-                    </ul>
+                    <div class="card-header">
+                        <h3><span class="icon">💻</span> System & Verktyg</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li><strong>ELN (Loggbok):</strong> <a href="https://www.psykiatriforskning.se/forskning/for-dig-som-forskar/dokumentation-eln/" target="_blank">Läs manualen här</a></li>
+                            <li><strong>REDCap (KI):</strong> <a href="https://medarbetare.ki.se/forskarstod/hantera-forskningsdata/skapa-samla-in-och-lagra-forskningsdata/redcap/tillgang-till-redcap" target="_blank">Ansök om tillgång (KI)</a></li>
+                            <li><strong>REDCap (Regionen):</strong> <a href="https://www.karolinska.se/forskning-och-utbildning/forskning/stodenheter-for-klinisk-forskning/redcap---datainsamling-i-kliniska-studier/" target="_blank">Stöd för kliniska studier</a></li>
+                            <li><strong>Transkribering:</strong> Använd verktyget <em>Whisper</em> (lokal installation).</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <!-- 5. JURIDIK / REGISTRY -->
                 <div id="card-legal-slso" class="guidance-card">
-                    <h3><span class="icon">🏥</span> Juridik & Uttag (SLSO)</h3>
-                    <ul>
-                        <li><strong>Menprövning/Uttag:</strong> fouu.slso@regionstockholm.se</li>
-                        <li><strong>GDPR/Avtal:</strong> gdpr.slso@regionstockholm.se</li>
-                        <li><strong>Mallar:</strong> Finns hos din FoU-koordinator (se ovan).</li>
-                    </ul>
+                    <div class="card-header">
+                        <h3><span class="icon">🏥</span> Juridik & Uttag (SLSO)</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li><strong>Menprövning/Uttag:</strong> fouu.slso@regionstockholm.se</li>
+                            <li><strong>GDPR/Avtal:</strong> gdpr.slso@regionstockholm.se</li>
+                            <li><strong>Mallar:</strong> Finns hos din FoU-koordinator (se ovan).</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div id="card-legal-ki" class="guidance-card">
-                    <h3><span class="icon">🎓</span> Juridik & Avtal (KI)</h3>
-                    <p>Kontakta juristerna på avtalsenheten.</p>
-                    <a href="mailto:avtal@ki.se">avtal@ki.se</a>
+                    <div class="card-header">
+                        <h3><span class="icon">🎓</span> Juridik & Avtal (KI)</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Kontakta juristerna på avtalsenheten.</p>
+                        <a href="mailto:avtal@ki.se">avtal@ki.se</a>
+                    </div>
                 </div>
 
                 <!-- 6. ETIK -->
                 <div id="card-etik" class="guidance-card">
-                    <h3><span class="icon">⚖️</span> Etikprövning</h3>
-                    <p>Alla kliniska studier måste ha godkännande från Etikprövningsmyndigheten (EPM). Information om hur ansökan går till hittar du hos EPM.</p>
-                    <p><a href="https://etikprovningsmyndigheten.se/for-forskare/sa-gar-det-till/" target="_blank">Etikprövning – så går det till &rarr;</a></p>
-                    <hr style="border: 0; border-top: 1px solid #eee; margin: 10px 0;">
-                    <p><strong>Behöver du hjälp med förhandsgranskning?</strong><br>
-                    Vi på CPF Support hjälper dig gärna att granska din ansökan innan du skickar den till EPM.</p>
-                    <p>1. Skriv ut ansökan som PDF från Ethix.<br>
-                       2. Mejla den till oss.</p>
-                    <a href="mailto:cpfsupport@cns.ki.se">cpfsupport@cns.ki.se</a>
+                    <div class="card-header">
+                        <h3><span class="icon">⚖️</span> Etikprövning</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Alla kliniska studier måste ha godkännande från Etikprövningsmyndigheten (EPM). Information om hur ansökan går till hittar du hos EPM.</p>
+                        <a href="https://etikprovningsmyndigheten.se/for-forskare/sa-gar-det-till/" target="_blank" style="margin-bottom: 20px;">Etikprövning – så går det till &rarr;</a>
+                        
+                        <div style="background-color: #f9f9f9; padding: 15px; border-radius: 4px; margin-top: 15px;">
+                            <p style="margin-top:0;"><strong>Behöver du hjälp med förhandsgranskning?</strong></p>
+                            <p>Vi på CPF Support hjälper dig gärna att granska din ansökan innan du skickar den till EPM.</p>
+                            <p>1. Skriv ut ansökan som PDF från Ethix.<br>
+                               2. Mejla den till oss.</p>
+                            <a href="mailto:cpfsupport@cns.ki.se">cpfsupport@cns.ki.se</a>
+                        </div>
+                    </div>
                 </div>
                 
                  <!-- 7. RDO -->
                 <div id="card-rdo" class="guidance-card">
-                    <h3><span class="icon">💾</span> RDO (Data Office)</h3>
-                    <p>För granskning av Datahanteringsplan (DMP) och generella datafrågor.</p>
-                    <a href="mailto:rdo@ki.se">rdo@ki.se</a>
+                    <div class="card-header">
+                        <h3><span class="icon">💾</span> RDO (Data Office)</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>För granskning av Datahanteringsplan (DMP) och generella datafrågor.</p>
+                        <a href="mailto:rdo@ki.se">rdo@ki.se</a>
+                    </div>
                 </div>
 
                 <span class="reset-link" onclick="location.reload()">Börja om</span>
